@@ -17,8 +17,8 @@ class Db
         $paramsPath = array(
             'host' => 'localhost',
             'dbname' => 'taskmanager',
-            'user' => 'root',
-            'password' => '',
+            'user' => 'newuser',
+            'password' => 'password',
         );
         // Получаем параметры подключения из файла
 

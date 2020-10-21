@@ -3,24 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Задачник</title>
+    <?php require 'head_view.php'; ?>
 </head>
 <body>
 <h1 style="text-align: center">Задачник</h1>
 <p align="right"><a href="/index/login" class="btn btn-success">Авторизация</a></p>
 <p align="center">
-    <?php
-    $paginator = new Paginator();
-    $page = $_GET["page"];
-    if ($page < 1 or $page == "") $page = 1;
-    // количество строк-статей на стр.
-    $limit = 3;
-    // начало выборки из БД
-    $start = $paginator->getStart($page, $limit);
-    $articles = $paginator->getAllArticles($start, $limit);
-    echo $paginator->pagination($page, $limit);
+    <?php 
+        $paginator = new Controller_Main();
+        echo $paginator->pagination($paginator::$page, $paginator::LIMIT);
     ?>
 </p>
-<form method="POST">
+<form method="GET">
     <div class="form-group">
         <label for="selectOrder">Сортировка по полю:
             <select name="orderField">
@@ -51,16 +45,17 @@
     </tr>
     </thead>
     <tbody>
-    <?php
-    foreach (Paginator::getAllArticles($start, $limit) as $articles): ?>
-        <tr>
-            <td><?= $articles['id'] ?></td>
-            <td><?= $articles['name'] ?></td>
-            <td><?= $articles['email'] ?></td>
-            <td><?= $articles['text_of_task'] ?></td>
-            <td><?= $articles['status'] ?></td>
-        </tr>
-    <?php endforeach; ?>
+        <?php
+        foreach ($paginator::getAllArticles($paginator::$start, $paginator::LIMIT) as $articles): ?>
+            <tr>
+                <td><?= $articles['id'] ?></td>
+                <td><?= $articles['name'] ?></td>
+                <td><?= $articles['email'] ?></td>
+                <td><?= $articles['text_of_task'] ?></td>
+                <td><?= $articles['status'] ?></td>
+            </tr>
+        <?php endforeach;
+        ?>
     </tbody>
 </table>
 <div id="preview"></div>

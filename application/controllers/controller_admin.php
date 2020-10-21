@@ -12,45 +12,63 @@ class Controller_Admin extends Controller
         } else {
             session_destroy();
             header('Refresh: 1; URL=/index/login');
-            //Route::ErrorPage404();
         }
 
     }
 
     function action_updateTask()
     {
-        if (isset($_POST['text_of_task_admin']) && isset($_POST['id_admin'])) {
-            $db = Db::getConnection();
-            $id_admin = ($_POST['id_admin']);
-            $text_of_task_admin = strip_tags($_POST['text_of_task_admin']);
-            if (isset($_POST['submit'])) {
-                $result = $db->prepare("UPDATE `taskmanager` SET `text_of_task` = :text_of_task_admin WHERE `id` = :id");
-                $result->bindParam(':text_of_task_admin', $text_of_task_admin, PDO::PARAM_STR);
-                $result->bindParam(':id', $id_admin, PDO::PARAM_INT);
-                $result->execute();
+        session_start();
+        if (isset($_SESSION['admin'])) {
+            if (!empty($_POST['text_of_task_admin']) && !empty($_POST['id_admin'])) {
+                $id_admin = $_POST['id_admin'];
+                $text_of_task_admin = strip_tags($_POST['text_of_task_admin']);
+                if (isset($_POST['submit'])) {
+                    admin::UpdateTask($text_of_task_admin, $id_admin);
+                    header_remove();
+                    header('Refresh: 1; URL=/index/admin');
+                    echo "<span style='color:blue;'>Текст задания изменен</span>";
+                }
+            } else {
+                echo "<span style='color:red;'>Не введены данные</span>";
                 header_remove();
-                header('Refresh: 1; URL=/index/admin');
-                echo "<span style='color:blue;'>Текст задания изменен</span>";
+                header('Refresh: 2; URL=/index/admin');
             }
-        } else echo "<span style='color:red;'>Не введены данные</span>";
+        }
+        else {
+            echo "<span style='color:red;'>Вы не администратор</span>";
+            header_remove();
+            header('Refresh: 1; URL=/index/login');
+        }
     }
 
     function action_updateStatus()
     {
-        if (isset($_POST['id_admin']) && isset($_POST['status_admin'])) {
-            $db = Db::getConnection();
-            $id_admin = ($_POST['id_admin']);
-            $status = $_POST['status_admin'];
-            if (isset($_POST['submit'])) {
-                $result = $db->prepare("UPDATE `taskmanager` SET `status` = :status WHERE `id` = :id");
-                $result->bindParam(':id', $id_admin, PDO::PARAM_INT);
-                $result->bindParam(':status', $status, PDO::PARAM_BOOL);
-                $result->execute();
-                header_remove();
-                header('Refresh: 1; URL=/index/admin');
-                echo "<span style='color:blue;'>Статус изменен</span>";
+        session_start();
+        if (isset($_SESSION['admin'])) {
+            if(empty($_POST['status_admin'])) {
+                $_POST['status_admin'] = "not done";   
             }
-        } else echo "<span style='color:red;'>Не введены данные</span>";
+            if (!empty($_POST['id_admin']) && !empty($_POST['status_admin'])) {
+                $id_admin = ($_POST['id_admin']);
+                $status = $_POST['status_admin'];
+                if (isset($_POST['submit'])) {
+                    admin::UpdateStatus($status, $id_admin);
+                    header_remove();
+                    header('Refresh: 1; URL=/index/admin');
+                    echo "<span style='color:blue;'>Статус изменен</span>";
+                }
+            } else {
+                echo "<span style='color:red;'>Не введены данные</span>";
+                header_remove();
+                header('Refresh: 2; URL=/index/admin');
+            }
+        }
+        else {
+            echo "<span style='color:red;'>Вы не администратор</span>";
+            header_remove();
+            header('Refresh: 1; URL=/index/login');
+        }
     }
 
     function action_logout()
