@@ -59,7 +59,7 @@ Class admin extends Model
         $db = Db::getConnection();
         $result = $db->prepare("UPDATE `taskmanager` SET `status` = :status WHERE `id` = :id");
         $result->bindParam(':id', $id_admin, PDO::PARAM_INT);
-        $result->bindParam(':status', $status, PDO::PARAM_BOOL);
+        $result->bindParam(':status', $status, PDO::PARAM_STR);
         return $result->execute();
     }
     

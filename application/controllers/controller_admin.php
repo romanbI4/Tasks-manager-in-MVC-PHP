@@ -47,7 +47,10 @@ class Controller_Admin extends Controller
         session_start();
         if (isset($_SESSION['admin'])) {
             if(empty($_POST['status_admin'])) {
-                $_POST['status_admin'] = "not done";   
+                $_POST['status_admin'] = 'not done';   
+            }
+            elseif($_POST['status_admin'] = 'on') {
+                $_POST['status_admin'] = 'done';
             }
             if (!empty($_POST['id_admin']) && !empty($_POST['status_admin'])) {
                 $id_admin = ($_POST['id_admin']);
