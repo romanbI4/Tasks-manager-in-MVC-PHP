@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Окт 22 2020 г., 01:03
+-- Время создания: Окт 22 2020 г., 11:00
 -- Версия сервера: 8.0.21-0ubuntu0.20.04.4
 -- Версия PHP: 7.4.3
 
@@ -60,9 +60,9 @@ CREATE TABLE `taskmanager` (
 --
 
 INSERT INTO `taskmanager` (`id`, `name`, `email`, `text_of_task`, `status`, `admin`) VALUES
-(103, 'ghff', 'vdov.romanoff@yandex.ru', 'alert(1)', 'not done', 'Отредактировано администратором'),
-(104, 'sad', 'vdov.romanoff@yandex.ru', 'alert(1)', 'not done', 'Отредактировано администратором'),
-(105, 'RomanbI4', 'vdov.romanoff@yandex.ru', 'Начать диплом', 'done', 'Отредактировано пользователем'),
+(103, 'ghff', 'vdov.romanoff@yandex.ru', 'alert(1)+1231', 'done', 'Отредактировано администратором'),
+(104, 'sad', 'vdov.romanoff@yandex.ru', 'alert(1)', 'done', 'Отредактировано администратором'),
+(105, 'RomanbI4', 'vdov.romanoff@yandex.ru', 'alert(1)+1231', 'done', 'Отредактировано администратором'),
 (106, 'dmitry', 'vdov.romanoff@gmail.com', 'Закончить курсач', 'done', 'Отредактировано администратором'),
 (107, 'Dragomanov', 'vdov.romanoff@ukr.net', 'Project', 'done', 'Отредактировано пользователем'),
 (108, 'Dragomanovv', 'vdov.romanoff@ukr.net', 'Project end', 'done', 'Отредактировано пользователем'),
@@ -70,7 +70,8 @@ INSERT INTO `taskmanager` (`id`, `name`, `email`, `text_of_task`, `status`, `adm
 (110, 'Mizon ', 'vdov.romanoff@gmail.com', 'asdasda', 'done', 'Отредактировано пользователем'),
 (111, 'Mizon2', 'vdov.romanoff@gmail.com', 'asdasda', 'done', 'Отредактировано пользователем'),
 (112, 'test', 'test@test.com', 'test job', 'not done', 'Отредактировано пользователем'),
-(113, 'No solutions', 'vdov.romanoff@gmail.com', 'alert(11)', 'done', 'Отредактировано администратором');
+(113, 'No solutions', 'vdov.romanoff@gmail.com', 'alert(11)', 'done', 'Отредактировано администратором'),
+(114, 'Mizon ', 'vdov.romanoff@gmail.com', 'asdasda', 'done', 'Отредактировано пользователем');
 
 --
 -- Индексы сохранённых таблиц
@@ -90,7 +91,7 @@ ALTER TABLE `taskmanager`
 -- AUTO_INCREMENT для таблицы `taskmanager`
 --
 ALTER TABLE `taskmanager`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
