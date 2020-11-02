@@ -1,12 +1,17 @@
 <?php
 
-class Controller_Main extends Controller
+namespace App\controllers;
+
+use App\core\Controller;
+use App\models\main;
+
+class mainController extends Controller
 {
     const LIMIT = 3;
     const PAGE = 1;
     static public $page, $start;
 
-    function action_index()
+    function actionIndex()
     {
         if (isset($_POST['submit'])) {
             $name = strip_tags($_POST['name']);
@@ -18,7 +23,7 @@ class Controller_Main extends Controller
                     if ($email_validate) {
                         main::InsertInfo($name, $email, $text_of_task);
                         header_remove();
-                        header('Refresh: 1; URL=/index');
+                        header('Refresh: 1; URL=/main/index');
                         echo "<span style='color:blue;'>Данные добавлены</span>";
                     } else {
                         echo "<span style='color:red;'>Введите верный Email(формата:test@text.com)</span>";
@@ -37,13 +42,13 @@ class Controller_Main extends Controller
             self::$page = self::PAGE;
         }
         self::$start = self::getStart(self::$page, self::LIMIT);
-        $this->view->generate('template_view.php', [
+        $this->view->generate('/main/index.php', [
             'page' => self::$page,
             'start' => self::$start,
         ]);
     }
 
-    static function action_sort()
+    static function actionSort()
     {
         if (isset($_GET['orderField']) && isset($_GET['sort'])) {
             $orderField = $_GET['orderField'];

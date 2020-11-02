@@ -1,0 +1,9 @@
+{
+    "name": "autoload/composer",
+    "description": "Autoload in Composer",
+    "autoload": {
+        "psr-4": {
+            "App\\": "application/"
+        }
+    }
+}

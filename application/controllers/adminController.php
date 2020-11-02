@@ -1,22 +1,27 @@
 <?php
 
-class Controller_Admin extends Controller
+namespace App\controllers;
+
+use App\core\Controller;
+use App\models\admin;
+
+class adminController extends Controller
 {
 
-    function action_index()
+    public function actionIndex()
     {
         session_start();
 
         if ($_SESSION['admin'] == 123) {
-            $this->view->generate('admin_view.php', 'template_view.php');
+            $this->view->generate('/admin/index.php', '/main/index.php');
         } else {
             session_destroy();
-            header('Refresh: 1; URL=/index/login');
+            header('Refresh: 1; URL=/login/index');
         }
 
     }
 
-    function action_updateTask()
+    function actionUpdateTask()
     {
         session_start();
         if (isset($_SESSION['admin'])) {
@@ -26,23 +31,23 @@ class Controller_Admin extends Controller
                 if (isset($_POST['submit'])) {
                     admin::UpdateTask($text_of_task_admin, $id_admin);
                     header_remove();
-                    header('Refresh: 1; URL=/index/admin');
+                    header('Refresh: 1; URL=/admin/index');
                     echo "<span style='color:blue;'>Текст задания изменен</span>";
                 }
             } else {
                 echo "<span style='color:red;'>Не введены данные</span>";
                 header_remove();
-                header('Refresh: 2; URL=/index/admin');
+                header('Refresh: 2; URL=/admin/index');
             }
         }
         else {
             echo "<span style='color:red;'>Вы не администратор</span>";
             header_remove();
-            header('Refresh: 1; URL=/index/login');
+            header('Refresh: 1; URL=/login/index');
         }
     }
 
-    function action_updateStatus()
+    function actionUpdateStatus()
     {
         session_start();
         if (isset($_SESSION['admin'])) {
@@ -58,27 +63,27 @@ class Controller_Admin extends Controller
                 if (isset($_POST['submit'])) {
                     admin::UpdateStatus($status, $id_admin);
                     header_remove();
-                    header('Refresh: 1; URL=/index/admin');
+                    header('Refresh: 1; URL=/admin/index');
                     echo "<span style='color:blue;'>Статус изменен</span>";
                 }
             } else {
                 echo "<span style='color:red;'>Не введены данные</span>";
                 header_remove();
-                header('Refresh: 2; URL=/index/admin');
+                header('Refresh: 2; URL=/admin/index');
             }
         }
         else {
             echo "<span style='color:red;'>Вы не администратор</span>";
             header_remove();
-            header('Refresh: 1; URL=/index/login');
+            header('Refresh: 1; URL=/login/index');
         }
     }
 
-    function action_logout()
+    function actionLogout()
     {
         session_start();
         session_destroy();
-        header('Location:/index');
+        header('Location:/main/index');
         echo "Успешно вышли из Админки!";
     }
 

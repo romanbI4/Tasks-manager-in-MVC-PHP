@@ -1,5 +1,11 @@
 <?php
 
+namespace App\models;
+
+use App\core\Model;
+use App\core\Db;
+use PDO;
+
 Class admin extends Model
 {
 

@@ -1,12 +1,15 @@
+<?php 
+use App\models\admin;
+?>
 <head>
     <title>Панель администрирования</title>
-    <?php require 'head_view.php'; ?>
+    <?php require __DIR__ . '/../head.php'; ?>
 </head>
 <body>
     <h1 align="center">Панель администрирования</h1>
-    <p align="right"><a href="/index/admin/logout" class="btn btn-success">Выход</a></p>
+    <p align="right"><a href="/admin/logout" class="btn btn-success">Выход</a></p>
     <div id="update_box">
-        <form method="POST" action="/index/admin/updateTask">
+        <form method="POST" action="/admin/updateTask">
             <label for="text_of_task_admin">Введите текст задачи</label>
             <input type="text" name="text_of_task_admin"/>
             <label for="id_admin">Введите ид задачи</label>
@@ -15,7 +18,7 @@
         </form>
     </div>
     <div id="update_box">
-        <form method="POST" action="/index/admin/updateStatus">
+        <form method="POST" action="/admin/updateStatus">
             <label for="id_admin">Введите ид задачи</label>
             <input type="text" name="id_admin"/>
             <label for="status">Выберите статус задачи</label>
@@ -35,7 +38,8 @@
         </thead>
         <tbody>
         <?php
-        foreach (admin::GetInfo() as $index): ?>
+        $admin = new admin();
+        foreach ($admin::GetInfo() as $index): ?>
             <tr>
                 <td><?= $index['id'] ?></td>
                 <td><?= $index['name'] ?></td>

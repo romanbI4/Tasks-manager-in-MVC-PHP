@@ -1,5 +1,9 @@
 <?php
 
+namespace App\core;
+
+use App\core\View;
+
 class Controller
 {
 
@@ -13,6 +17,6 @@ class Controller
 
     function action_index()
     {
-
+        echo 1;
     }
 }

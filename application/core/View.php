@@ -1,9 +1,11 @@
 <?php
 
+namespace App\core;
+
 class View
 {
 
-    function generate($template_view, $data = null)
+    static function generate($template_view, $data = null)
     {
         if(!empty($data) && is_array($data)) {
             extract($data);

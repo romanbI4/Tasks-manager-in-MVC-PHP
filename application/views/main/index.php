@@ -1,16 +1,19 @@
+<?php 
+use App\controllers\mainController;
+?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Задачник</title>
-    <?php require 'head_view.php'; ?>
+    <?php require __DIR__ . '/../head.php'; ?>
 </head>
 <body>
 <h1 style="text-align: center">Задачник</h1>
-<p align="right"><a href="/index/login" class="btn btn-success">Авторизация</a></p>
+<p align="right"><a href="/login/index" class="btn btn-success">Авторизация</a></p>
 <p align="center">
     <?php 
-        $paginator = new Controller_Main();
+        $paginator = new mainController();
         echo $paginator->pagination($paginator::$page, $paginator::LIMIT);
     ?>
 </p>

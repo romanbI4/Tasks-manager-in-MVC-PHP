@@ -1,5 +1,12 @@
 <?php
 
+namespace App\models;
+
+use App\core\Model;
+use App\core\Db;
+use App\controllers\mainController;
+use PDO;
+
 Class main extends Model
 {
 
@@ -11,8 +18,8 @@ Class main extends Model
      */
     public static function InsertInfo($name, $email, $text_of_task)
     {
-
-        $db = Db::getConnection();
+        $db = new Db();
+        $db = $db::getConnection();
         $sql = 'INSERT INTO `taskmanager`(`name`, `email`,`text_of_task`) VALUES (:name,:email,:text_of_task)';
         $result = $db->prepare($sql);
         $result->bindParam(':name', $name, PDO::PARAM_STR);
@@ -24,16 +31,18 @@ Class main extends Model
 
     public static function getAllArticles($start, $limit)
     {
-        $db = Db::getConnection();
-        $result = $db->prepare("SELECT `id`, `name`, `email`, `text_of_task`, `status` FROM `taskmanager`" . Controller_Main::action_Sort() . " LIMIT " . $start . ", " . $limit);
+        $db = new Db();
+        $db = $db::getConnection();
+        $result = $db->prepare("SELECT `id`, `name`, `email`, `text_of_task`, `status` FROM `taskmanager`" . mainController::actionSort() . " LIMIT " . $start . ", " . $limit);
         $result->execute();
         return $result;
     }
 
     public static function countArticles()
     {
-        $db = Db::getConnection();
-        $result = $db->query("SELECT COUNT(`id`) FROM `taskmanager`" . Controller_Main::action_Sort());
+        $db = new Db();
+        $db = $db::getConnection();
+        $result = $db->query("SELECT COUNT(`id`) FROM `taskmanager`" . mainController::actionSort());
         return $result->fetch();
     }
 }

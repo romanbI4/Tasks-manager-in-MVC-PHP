@@ -1,6 +1,6 @@
 <head>
     <title>Страница авторизации</title>
-    <?php require 'head_view.php'; ?>
+    <?php require __DIR__ . '/../head.php'; ?>
 </head>
 <body>
     <h1>Страница авторизации</h1>
