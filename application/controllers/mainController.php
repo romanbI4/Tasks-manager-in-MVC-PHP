@@ -91,9 +91,9 @@ class mainController extends Controller
 
     public static function setResultToArray($result)
     {
-        $array = array();
-        while ($row = $result->fetch()) $array[] = $row;
-        return $array;
+        $arrayAllArticles = array();
+        while ($row = $result->fetch()) $arrayAllArticles[] = $row;
+        return $arrayAllArticles;
     }
 
     public static function countArticles()

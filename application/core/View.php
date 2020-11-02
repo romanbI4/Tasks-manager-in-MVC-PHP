@@ -5,10 +5,10 @@ namespace App\core;
 class View
 {
 
-    static function generate($template_view, $data = null)
+    static function generate($template_view, $dataInView = null)
     {
-        if(!empty($data) && is_array($data)) {
-            extract($data);
+        if(!empty($dataInView) && is_array($dataInView)) {
+            extract($dataInView);
         }
         include 'application/views/' . $template_view;
     }

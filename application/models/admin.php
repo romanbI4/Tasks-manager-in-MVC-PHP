@@ -18,18 +18,18 @@ Class admin extends Model
         $db = Db::getConnection();
         $sql = "SELECT * FROM `taskmanager`";
         $result = $db->query($sql);
-        $index = array();
+        $allTaskData = array();
         $i = 0;
         while ($row = $result->fetch()) {
-            $index[$i]['id'] = $row['id'];
-            $index[$i]['name'] = $row['name'];
-            $index[$i]['email'] = $row['email'];
-            $index[$i]['text_of_task'] = $row['text_of_task'];
-            $index[$i]['status'] = $row['status'];
-            $index[$i]['admin'] = $row['admin'];
+            $allTaskData[$i]['id'] = $row['id'];
+            $allTaskData[$i]['name'] = $row['name'];
+            $allTaskData[$i]['email'] = $row['email'];
+            $allTaskData[$i]['text_of_task'] = $row['text_of_task'];
+            $allTaskData[$i]['status'] = $row['status'];
+            $allTaskData[$i]['admin'] = $row['admin'];
             $i++;
         }
-        return $index;
+        return $allTaskData;
 
     }
 

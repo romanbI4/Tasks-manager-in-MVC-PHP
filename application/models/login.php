@@ -12,12 +12,12 @@ class login extends Model
     {
         $db = Db::getConnection();
         $result = $db->query("SELECT * FROM `adminka`");
-        $index = array();
+        $logindata = array();
         while ($row = $result->fetch()) {
-            $index['login'] = $row['login'];
-            $index['password'] = $row['password'];
+            $logindata['login'] = $row['login'];
+            $logindata['password'] = $row['password'];
         }
-        return $index;
+        return $logindata;
     }
     
 }
