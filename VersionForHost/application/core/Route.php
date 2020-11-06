@@ -7,23 +7,24 @@ class Route
     static public $routes = null;
 
     static function start()
-    {
+    { 
+        
         if (self::$routes == null) {
-            $url = explode('?', substr(strtolower($_SERVER['REQUEST_URI']), 1));
+            $url = explode('index.php?', substr(strtolower($_SERVER['REQUEST_URI']), 1));
             self::$routes = explode('/', $url[0]);
         }
         
         $controller_name = 'main';
         $action_name = 'index';
 
-        if (!empty(self::$routes[0])) {
-            $controller_name = self::$routes[0];
+        if (!empty(self::$routes[2])) {
+            $controller_name = self::$routes[2];
         }
 
-        if (!empty(self::$routes[1])) {
-            $action_name = self::$routes[1];
+        if (!empty(self::$routes[3])) {
+            $action_name = self::$routes[3];
         }
-        
+
         $controller_class = 'App\\controllers\\'.$controller_name . 'Controller';
         $action_name = 'action'.$action_name;
 

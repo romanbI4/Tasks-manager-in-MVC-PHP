@@ -13,6 +13,7 @@ class mainController extends Controller
 
     function actionIndex()
     {
+        $path = $_SERVER['SCRIPT_NAME'];
         if (isset($_POST['submit'])) {
             $name = strip_tags($_POST['name']);
             $email = strip_tags($_POST['email']);
@@ -23,7 +24,7 @@ class mainController extends Controller
                     if ($email_validate) {
                         main::InsertInfo($name, $email, $text_of_task);
                         header_remove();
-                        header('Refresh: 1; URL=/main/index');
+                        header("Refresh: 1; URL=$path/main/index");
                         echo "<span style='color:blue;'>Данные добавлены</span>";
                     } else {
                         echo "<span style='color:red;'>Введите верный Email(формата:test@text.com)</span>";
@@ -109,6 +110,7 @@ class mainController extends Controller
 
     public static function pagination($page, $limit)
     {
+        $path = dirname($_SERVER['SCRIPT_NAME']);
         $count_articles = self::countArticles();
         $count_pages = ceil($count_articles / self::LIMIT);
         if ($page > $count_pages) $page = $count_pages;
@@ -122,42 +124,42 @@ class mainController extends Controller
                 if ($page == 1) {
                     $pagination .= "<span>Первая </span>";
                 } else {
-                    $pagination .= "<a href='/?page=" . $prev . '&orderField=' . $_GET['orderField'] . '&sort=' . $_GET['sort'] . "'>Предыдущая </a>";
-                    if ($prev == 1) $pagination .= "<a href='/?page=" . $prev . '&orderField=' . $_GET['orderField'] . '&sort=' . $_GET['sort'] . "'>Первая </a>";
-                    else $pagination .= "<a href='/?page=" . $prev . '&orderField=' . $_GET['orderField'] . '&sort=' . $_GET['sort'] . "'>Предыдущая </a>";
+                    $pagination .= "<a href='$path/index.php?page=" . $prev . '&orderField=' . $_GET['orderField'] . '&sort=' . $_GET['sort'] . "'>Предыдущая </a>";
+                    if ($prev == 1) $pagination .= "<a href='$path/index.php?page=" . $prev . '&orderField=' . $_GET['orderField'] . '&sort=' . $_GET['sort'] . "'>Первая </a>";
+                    else $pagination .= "<a href='$path/index.php?page=" . $prev . '&orderField=' . $_GET['orderField'] . '&sort=' . $_GET['sort'] . "'>Предыдущая </a>";
                 }
                 for ($i = 1; $i <= $count_pages; $i++) {
                     if ($i == $page) $pagination .= "<span> " . $i . " </span>";
-                    elseif ($i == 1) $pagination .= "<a href='/?page=" . $i . '&orderField=' . $_GET['orderField'] . '&sort=' . $_GET['sort'] . "'> " . $i . " </a>";
-                    else $pagination .= "<a href='/?page=" . $i . '&orderField=' . $_GET['orderField'] . '&sort=' . $_GET['sort'] . "'> " . $i . " </a>";
+                    elseif ($i == 1) $pagination .= "<a href='$path/index.php?page=" . $i . '&orderField=' . $_GET['orderField'] . '&sort=' . $_GET['sort'] . "'> " . $i . " </a>";
+                    else $pagination .= "<a href='$path/index.php?page=" . $i . '&orderField=' . $_GET['orderField'] . '&sort=' . $_GET['sort'] . "'> " . $i . " </a>";
                 }
                 if ($page == $count_pages) {
                     $pagination .= "<span> Следующая</span>";
                     $pagination .= "<span> Последняя</span>";
                 } else {
-                    $pagination .= "<a href='/?page=" . $next . '&orderField=' . $_GET['orderField'] . '&sort=' . $_GET['sort'] . "'> Следующая</a>";
-                    $pagination .= "<a href='/?page=" . $count_pages . '&orderField=' . $_GET['orderField'] . '&sort=' . $_GET['sort'] . "'> Последняя</a>";
+                    $pagination .= "<a href='$path/index.php?page=" . $next . '&orderField=' . $_GET['orderField'] . '&sort=' . $_GET['sort'] . "'> Следующая</a>";
+                    $pagination .= "<a href='$path/index.php?page=" . $count_pages . '&orderField=' . $_GET['orderField'] . '&sort=' . $_GET['sort'] . "'> Последняя</a>";
                 }
             } else {
                 // pagination
                 if ($page == 1) {
                     $pagination .= "<span>Первая </span>";
                 } else {
-                    $pagination .= "<a href='/'>Предыдущая </a>";
-                    if ($prev == 1) $pagination .= "<a href='/'>Первая </a>";
-                    else $pagination .= "<a href='/?page=" . $prev . "'>Предыдущая </a>";
+                    $pagination .= "<a href='$path/'>Первая </a>";
+                    if ($prev == 1) $pagination .= "<a href='$path/'>Первая </a>";
+                    else $pagination .= "<a href='$path/index.php?page=" . $prev . "'>Предыдущая </a>";
                 }
                 for ($i = 1; $i <= $count_pages; $i++) {
                     if ($i == $page) $pagination .= "<span> " . $i . " </span>";
-                    elseif ($i == 1) $pagination .= "<a href='/'> " . $i . " </a>";
-                    else $pagination .= "<a href='/?page=" . $i . "'> " . $i . " </a>";
+                    elseif ($i == 1) $pagination .= "<a href='$path/'> " . $i . " </a>";
+                    else $pagination .= "<a href='$path/index.php?page=" . $i . "'> " . $i . " </a>";
                 }
                 if ($page == $count_pages) {
                     $pagination .= "<span> Следующая</span>";
                     $pagination .= "<span> Последняя</span>";
                 } else {
-                    $pagination .= "<a href='/?page=" . $next . "'> Следующая</a>";
-                    $pagination .= "<a href='/?page=" . $count_pages . "'> Последняя</a>";
+                    $pagination .= "<a href='$path/index.php?page=" . $next . "'> Следующая</a>";
+                    $pagination .= "<a href='$path/index.php?page=" . $count_pages . "'> Последняя</a>";
                 }
             }
         }
