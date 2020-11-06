@@ -3,5 +3,5 @@
     <?php require __DIR__ . '/../head.php'; ?>
 </head>
 <body>
-    <p><img src="/images/404.png"></p>
+    <p><img src="../front/images/404.png"></p>
 </body>

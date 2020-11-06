@@ -9,7 +9,7 @@ class Route
     static function start()
     {
         if (self::$routes == null) {
-            $url = explode('?', substr(strtolower($_SERVER['REQUEST_URI']), 1));
+            $url = explode('index.php?', substr(strtolower($_SERVER['REQUEST_URI']), 1));
             self::$routes = explode('/', $url[0]);
         }
         
